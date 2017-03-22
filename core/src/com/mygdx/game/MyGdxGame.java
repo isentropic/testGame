@@ -6,8 +6,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import com.mygdx.game.States.GameStateManager;
-import com.mygdx.game.States.MenuState;
+import com.mygdx.game.states.GameStateManager;
+import com.mygdx.game.states.MenuState;
 
 public class MyGdxGame extends ApplicationAdapter {
     public static final int WIDTH  = 480;
