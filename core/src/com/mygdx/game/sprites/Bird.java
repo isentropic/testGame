@@ -1,5 +1,7 @@
 package com.mygdx.game.sprites;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
@@ -14,11 +16,11 @@ public class Bird {
     private static final int GRAVITY = -15;
     private static final int MOVEMENT = 100;
 
+    private Sound flap;
     private Vector3 position;
     private Vector3 velocity;
-    private Animation birdAnimation;
-
     private Texture texture;
+    private Animation birdAnimation;
 
 
     private Rectangle bounds;
@@ -26,9 +28,10 @@ public class Bird {
     public Bird(int x, int y) {
         position = new Vector3(x, y, 0);
         velocity = new Vector3(0, 0, 0);
-        texture = new Texture("birdanimation.png");
+        texture  = new Texture("birdanimation.png");
+        bounds   = new Rectangle(x, y, texture.getWidth() / 3, texture.getHeight());
+        flap     = Gdx.audio.newSound(Gdx.files.internal("sfx_wing.ogg"));
         birdAnimation = new Animation(texture, 3, 3);
-        bounds = new Rectangle(x, y, texture.getWidth() / 3, texture.getHeight());
     }
 
     public void update(float dt) {
@@ -47,10 +50,12 @@ public class Bird {
 
     public void jump() {
         velocity.y = 250;
+        flap.play(0.1f);
     }
 
     public void dispose() {
         texture.dispose();
+        flap   .dispose();
     }
 
     public Vector3 getPosition() {
